@@ -7,7 +7,7 @@ jobs:
     strategy:
       matrix:
         # 2 of these should fail - 4 and 1.7.1
-        yara-version: [ "4", "3.10.0", "3.6", "2", "1.7.1" ]
+        yaraVersion: [ "4", "3.10.0", "3.6", "2", "1.7.1" ]
     name: YARA v${{ matrix.yara-version }}
     runs-on: ubuntu-latest
     steps:

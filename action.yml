@@ -2,7 +2,7 @@ name: "Setup YARA environment"
 description: "Setup a user-defined YARA version. Executable and compiler only; no yara-python."
 author: "ch0mler"
 inputs:
-  yara-version:
+  yaraVersion:
     description: "YARA version to use"
     default: "3.10.0"
     required: false
@@ -10,4 +10,4 @@ runs:
   using: "docker"
   image: "Dockerfile"
   args:
-    - ${{ inputs.yara-version }}
+    - ${{ inputs.yaraVersion }}

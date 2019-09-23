@@ -6,9 +6,9 @@ ALL_VERSIONS=( $(git ls-remote --tags https://github.com/VirusTotal/yara.git | g
 USR_INPUT=${ALL_VERSIONS[0]}
 
 # if the user provided input, use that instead
-if [ ! -z ${INPUT_YARA-VERSION} ]
+if [ ! -z ${INPUT_YARAVERSION} ]
 then
-    USR_INPUT="${INPUT_YARA-VERSION}"
+    USR_INPUT="${INPUT_YARAVERSION}"
 fi
 
 function resolve_version {
