@@ -30,3 +30,6 @@ RUN echo "Installing Yara v$YARA_VERSION" \
     && make check \
     && ldconfig /usr/local/lib
     # gotta make sure the YARA DLL path is available to load from
+
+ENTRYPOINT [ "yarac" ]
+CMD [ "--help" ]
