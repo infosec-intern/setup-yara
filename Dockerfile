@@ -4,11 +4,9 @@ FROM ubuntu:latest
 
 LABEL maintainer="thomas@infosec-intern.com"
 
-COPY LICENSE README.md /
-
 WORKDIR /tmp
-
-ARG YARA_VERSION="3.10.0"
+COPY LICENSE README.md /
+COPY install_yara.sh /tmp/install_yara.sh
 
 RUN apt-get -q update && apt-get install -q -y \
     automake \
@@ -20,16 +18,6 @@ RUN apt-get -q update && apt-get install -q -y \
     libmagic-dev \
     libssl-dev \
     libtool make
-RUN echo "Installing Yara v$YARA_VERSION" \
-    && git clone --recursive --branch v$YARA_VERSION https://github.com/VirusTotal/yara.git \
-    && cd /tmp/yara \
-    && ./bootstrap.sh \
-    && ./configure --with-crypto --enable-magic --enable-cuckoo --enable-dotnet \
-    && make \
-    && make install \
-    && make check \
-    && ldconfig /usr/local/lib
-    # gotta make sure the YARA DLL path is available to load from
+RUN chmod +x /tmp/install_yara.sh
 
-ENTRYPOINT [ "yarac" ]
-CMD [ "--help" ]
+ENTRYPOINT [ "/tmp/install_yara.sh" ]
