@@ -1,4 +1,3 @@
-# Slightly modified from https://hub.docker.com/r/blacktop/yara/dockerfile
 # Use the most recent Ubuntu LTS version
 FROM ubuntu:latest
 

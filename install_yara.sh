@@ -2,9 +2,8 @@
 
 # sort versions in reverse order - newest to oldest
 ALL_VERSIONS=( $(git ls-remote --tags https://github.com/VirusTotal/yara.git | grep -Eio "refs/tags/v[0-9\.]+$" | sed -e 's@refs/tags/v@@' | sort -Vr) )
-# use the latest version number
-DEFAULT_VERSION=${ALL_VERSIONS[0]}
-USR_INPUT=$DEFAULT_VERSION
+# latest version is used in case user does not provide input
+USR_INPUT=${ALL_VERSIONS[0]}
 
 # if the user provided input, use that instead
 if [ ! -z ${1} ]
@@ -35,7 +34,7 @@ function resolve_version {
 }
 
 function install_yara {
-    echo "Installing Yara v$YARA_VERSION"
+    echo "Installing YARA v$YARA_VERSION"
     git clone --recursive --branch v$YARA_VERSION https://github.com/VirusTotal/yara.git
     cd ./yara/
     ./bootstrap.sh
