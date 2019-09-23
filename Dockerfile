@@ -10,9 +10,9 @@ WORKDIR /tmp
 
 ARG YARA_VERSION="3.10.0"
 
-RUN apt-get -q update
-RUN apt-get install -q -y automake bison flex gcc git libjansson-dev libmagic-dev libssl-dev libtool make
 RUN echo "Installing Yara v$YARA_VERSION" \
+    && apt-get -q update \
+    && apt-get install -q -y automake bison flex gcc git libjansson-dev libmagic-dev libssl-dev libtool make \
     && git clone --recursive --branch v$YARA_VERSION https://github.com/VirusTotal/yara.git \
     && cd /tmp/yara \
     && ./bootstrap.sh \
@@ -20,5 +20,3 @@ RUN echo "Installing Yara v$YARA_VERSION" \
     && make \
     && make install \
     && make check
-
-CMD [ "yarac", "--help" ]
