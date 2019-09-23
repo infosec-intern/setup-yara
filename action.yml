@@ -1,12 +1,14 @@
-name: 'Container Action Template'
-description: 'Get started with Container actions'
-author: 'GitHub'
+name: 'Setup YARA environment'
+description: 'Setup a user-defined YARA version. Executable and compiler only; no yara-python.'
+author: 'ch0mler'
 inputs:
-  version:
+  # TODO: Add flags
+  # TODO: Add action-type: yarac, yara
+  yara-version:
     description: 'YARA version to use'
     default: '3.10.0'
 runs:
   using: 'docker'
   image: 'Dockerfile'
   args:
-    - ${{ inputs.version }}
+    - ${{ inputs.yara-version }}
