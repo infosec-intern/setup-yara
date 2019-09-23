@@ -1,5 +1,15 @@
-# Container Action Template
+# Work In Progress: setup-yara
 
-To get started, click the `Use this template` button on this repository [which will create a new repository based on this template](https://github.blog/2019-06-06-generate-new-repositories-with-repository-templates/).
+**Warning**: This is NOT ready to be used yet
 
-For info on how to build your first Container action, see the [toolkit docs folder](https://github.com/actions/toolkit/blob/master/docs/container-action.md).
+Run multiple Yara versions as GitHub Actions!
+
+Version input should line up to tags in https://github.com/VirusTotal/yara/tags
+
+Example:
+```
+steps:
+- uses: actions/setup-yara@master
+  with:
+    version: 3.10.0
+```

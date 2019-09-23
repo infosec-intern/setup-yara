@@ -4,7 +4,7 @@ author: 'GitHub'
 inputs:
   version:
     description: 'YARA version to use'
-    default: '3'
+    default: '3.10.0'
 runs:
   using: 'docker'
   image: 'Dockerfile'
