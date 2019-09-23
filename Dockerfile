@@ -5,7 +5,6 @@ FROM ubuntu:latest
 LABEL maintainer="thomas@infosec-intern.com"
 
 COPY LICENSE README.md /
-COPY entrypoint.sh /tmp/entrypoint.sh
 
 WORKDIR /tmp
 
@@ -19,7 +18,7 @@ RUN echo "Installing Yara v$YARA_VERSION" \
     && ./bootstrap.sh \
     && ./configure --with-crypto --enable-magic --enable-cuckoo --enable-dotnet \
     && make \
-    && make install
+    && make install \
+    && make check
 
-ENTRYPOINT [ "yarac" ]
-CMD [ "--help" ]
+CMD [ "yarac", "--help" ]
