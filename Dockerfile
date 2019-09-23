@@ -2,23 +2,16 @@
 # Use the most recent Ubuntu LTS version
 FROM ubuntu:latest
 
+LABEL maintainer="thomas@infosec-intern.com"
+
 COPY LICENSE README.md /
-COPY entrypoint.sh /entrypoint.sh
+COPY entrypoint.sh /tmp/entrypoint.sh
 
-RUN apt install automake bison flex gcc git libjansson-dev libmagic-dev libssl-dev libtool make
-RUN echo "Install Yara from source..." \
-    && cd /tmp/ \
-    && git clone --recursive --branch v$YARA_VERSION https://github.com/VirusTotal/yara.git \
-    && cd /tmp/yara \
-    && ./bootstrap.sh \
-    && ./configure --with-crypto --enable-magic --enable-cuckoo --enable-dotnet \
-    && make \
-    && make install \
-    && rm -rf /tmp/*
+WORKDIR /tmp
 
-VOLUME ["/malware"]
-VOLUME ["/rules"]
+RUN apt-get -q update
+RUN apt-get install -q -y automake bison flex gcc git libjansson-dev libmagic-dev libssl-dev libtool make
+RUN /bin/bash -c "/tmp/entrypoint.sh"
 
-WORKDIR /malware
-
-ENTRYPOINT ["/entrypoint.sh"]
+ENTRYPOINT [ "yarac" ]
+CMD [ "--help" ]
