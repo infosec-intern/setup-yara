@@ -11,7 +11,8 @@ jobs:
     name: YARA v${{ matrix.yara-version }}
     runs-on: ubuntu-latest
     steps:
-    - uses: infosec-intern/setup-yara@master
+    # use the local version of this action
+    - uses: ./
       with:
         yara-version: "3.10.0"
     # finally, we should be able to access YARA
