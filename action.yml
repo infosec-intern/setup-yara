@@ -2,8 +2,6 @@ name: 'Setup YARA environment'
 description: 'Setup a user-defined YARA version. Executable and compiler only; no yara-python.'
 author: 'ch0mler'
 inputs:
-  # TODO: Add flags
-  # TODO: Add action-type: yarac, yara
   yara-version:
     description: 'YARA version to use'
     default: '3.10.0'
