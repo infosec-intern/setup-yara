@@ -1,0 +1,18 @@
+name: setup-yara
+
+on: [push, pull_request]
+
+jobs:
+  install_yara:
+    strategy:
+      matrix:
+        # 2 of these should fail - 4 and 1.7.1
+        yara-version: [ "4", "3.10.0", "3.6", "2", "1.7.1" ]
+    name: YARA v${{ matrix.yara-version }}
+    runs-on: ubuntu-latest
+    steps:
+    - uses: infosec-intern/setup-yara@master
+      with:
+        yara-version: "3.10.0"
+    # finally, we should be able to access YARA
+    - run: yara -v
