@@ -1,3 +1,5 @@
 #!/bin/sh -l
 
-echo "hello $1"
+export YARA_VERSION = "$1"
+
+echo "Installing Yara v$YARA_VERSION"
