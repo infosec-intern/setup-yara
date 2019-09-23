@@ -11,6 +11,10 @@ jobs:
     name: YARA v${{ matrix.yara-version }}
     runs-on: ubuntu-latest
     steps:
+    # get a copy of the local repository
+    - uses: actions/checkout@v1
+    with:
+      fetch-depth: 1
     # use the local version of this action
     - uses: ./
       with:
