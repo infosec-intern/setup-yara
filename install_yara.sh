@@ -13,16 +13,20 @@ fi
 
 function resolve_version {
     echo "Available YARA versions: ${ALL_VERSIONS[*]}"
-    if [[ " ${ALL_VERSIONS[@]} " =~ " ${USR_INPUT} " ]]; then
+    if [[ " ${ALL_VERSIONS[@]} " =~ " ${USR_INPUT} " ]]
+    then
         echo "${USR_INPUT} is a valid version"
         YARA_VERSION="${USR_INPUT}"
     # gonna have to update version regex when 4+ comes up
-    elif [[ $USR_INPUT =~ ^[1-3](\.[0-9]{1,2})?$ ]]; then
+    elif [[ $USR_INPUT =~ ^[1-3](\.[0-9]{1,2})?$ ]]
+    then
         echo "${USR_INPUT} looks like a possible version number"
         # let's loop through to get the most up-to-date matching version
-        for i in "${ALL_VERSIONS[@]}"; do
+        for i in "${ALL_VERSIONS[@]}"
+        do
             pattern="^${USR_INPUT}.*"
-            if [[ $i =~ $pattern ]]; then
+            if [[ $i =~ $pattern ]]
+            then
                 YARA_VERSION=$i
                 break
             fi
@@ -48,6 +52,7 @@ function install_yara {
 }
 
 resolve_version
-if [[ ! -z ${YARA_VERSION} ]]; then
+if [[ ! -z ${YARA_VERSION} ]]
+then
     install_yara
 fi
