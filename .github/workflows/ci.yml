@@ -8,7 +8,7 @@ jobs:
       matrix:
         # 2 of these should fail - 4 and 1.7.1
         yaraVersion: [ "4", "3.10.0", "3.6", "2", "1.7.1" ]
-    name: YARA v${{ matrix.yara-version }}
+    name: YARA v${{ matrix.yaraVersion }}
     runs-on: ubuntu-latest
     steps:
     # get a copy of the local repository
@@ -18,6 +18,6 @@ jobs:
     # use the local version of this action
     - uses: ./
       with:
-        yara-version: "3.10.0"
+        yaraVersion: "3.10.0"
     # finally, we should be able to access YARA
     - run: yara -v
