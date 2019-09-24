@@ -20,7 +20,7 @@ jobs:
   #       yara-version: ${{ matrix.yara-version }}
   #   # finally, we should be able to access YARA
   #   - run: yara -v
-  install_yara_3.10:
+  install_yara_310:
     name: YARA v3.10.0
     runs-on: ubuntu-latest
     steps:
@@ -31,7 +31,7 @@ jobs:
       with:
         yara-version: "3.10.0"
     - run: yara -v
-  install_yara_3.6:
+  install_yara_36:
     name: YARA v3.6
     runs-on: ubuntu-latest
     steps:
