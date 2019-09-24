@@ -24,8 +24,7 @@ function resolve_version {
         # let's loop through to get the most up-to-date matching version
         for i in "${ALL_VERSIONS[@]}"
         do
-            pattern="^${USER_INPUT}.*"
-            if [[ $i =~ $pattern ]]
+            if [[ $i =~ "^${USER_INPUT}.*" ]]
             then
                 YARA_VERSION=$i
                 break
@@ -55,5 +54,9 @@ resolve_version
 if [[ ! -z ${YARA_VERSION} ]]
 then
     install_yara
-    yara -v
+    echo "Successfully installed ${yara -v}"
+    exit 0
+else
+    echo "How did you get here? Exiting"
+    exit 1
 fi
