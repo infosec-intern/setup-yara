@@ -55,4 +55,5 @@ resolve_version
 if [[ ! -z ${YARA_VERSION} ]]
 then
     install_yara
+    yara -v
 fi
