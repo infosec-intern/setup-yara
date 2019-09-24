@@ -12,7 +12,7 @@ Versions can be specified, and are matched against existing version tags found a
 
 ## Inputs
 
-### `yaraVersion`
+### `yara-version`
 
 Version input can be provided in the following formats:
 ```
@@ -33,7 +33,7 @@ If a full version is provided, it will be taken as-is.
 ```
 uses: actions/setup-yara@master
   with:
-    yaraVersion: 3.10.0
+    yara-version: 3.10.0
 ```
 
 #### Major/Minor Version
@@ -42,7 +42,7 @@ Major/minor versions will result in the most up-to-date version being taken. In 
 ```
 uses: actions/setup-yara@master
   with:
-    yaraVersion: 3.6
+    yara-version: 3.6
 ```
 
 #### Major Version
@@ -51,5 +51,5 @@ If only a major version is provided, the same rule is applied as major/minor. In
 ```
 uses: actions/setup-yara@master
   with:
-    yaraVersion: 2
+    yara-version: 2
 ```
