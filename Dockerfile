@@ -7,7 +7,7 @@ WORKDIR /tmp
 COPY LICENSE README.md /
 COPY install_yara.sh /tmp/install_yara.sh
 
-RUN apt-get -q update && apt-get install -q -y \
+RUN apt-get -qq update && apt-get install -qq -y \
     automake \
     bison \
     flex \
@@ -16,7 +16,8 @@ RUN apt-get -q update && apt-get install -q -y \
     libjansson-dev \
     libmagic-dev \
     libssl-dev \
-    libtool make
+    libtool \
+    make
 RUN chmod +x /tmp/install_yara.sh
 
 ENTRYPOINT [ "/tmp/install_yara.sh" ]
