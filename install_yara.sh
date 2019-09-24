@@ -3,30 +3,28 @@
 # sort versions in reverse order - newest to oldest
 ALL_VERSIONS=( $(git ls-remote --tags https://github.com/VirusTotal/yara.git | grep -Eio "refs/tags/v[0-9\.]+$" | sed -e 's@refs/tags/v@@' | sort -Vr) )
 # latest version is used in case user does not provide input
-USR_INPUT=${ALL_VERSIONS[0]}
-
-echo "Args: $@"
+USER_INPUT=${ALL_VERSIONS[0]}
 
 # if the user provided input, use that instead
-if [ ! -z ${1} ]
+if [[ ! -z ${INPUT_YARAVERSION} ]]
 then
-    USR_INPUT="${1}"
+    USER_INPUT=${INPUT_YARAVERSION}
 fi
 
 function resolve_version {
     echo "Available YARA versions: ${ALL_VERSIONS[*]}"
-    if [[ " ${ALL_VERSIONS[@]} " =~ " ${USR_INPUT} " ]]
+    if [[ " ${ALL_VERSIONS[@]} " =~ " ${USER_INPUT} " ]]
     then
-        echo "${USR_INPUT} is a valid version"
-        YARA_VERSION="${USR_INPUT}"
+        echo "${USER_INPUT} is a valid version"
+        YARA_VERSION="${USER_INPUT}"
     # gonna have to update version regex when 4+ comes up
-    elif [[ $USR_INPUT =~ ^[1-3](\.[0-9]{1,2})?$ ]]
+    elif [[ $USER_INPUT =~ ^[1-3](\.[0-9]{1,2})?$ ]]
     then
-        echo "${USR_INPUT} looks like a possible version number"
+        echo "${USER_INPUT} looks like a possible version number"
         # let's loop through to get the most up-to-date matching version
         for i in "${ALL_VERSIONS[@]}"
         do
-            pattern="^${USR_INPUT}.*"
+            pattern="^${USER_INPUT}.*"
             if [[ $i =~ $pattern ]]
             then
                 YARA_VERSION=$i
@@ -34,7 +32,7 @@ function resolve_version {
             fi
         done
     else
-        echo "Could not resolve version number for ${USR_INPUT}. Exiting"
+        echo "Could not resolve version number for ${USER_INPUT}. Exiting"
         exit 1
     fi
 }

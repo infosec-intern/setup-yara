@@ -4,7 +4,6 @@ author: "ch0mler"
 inputs:
   yaraVersion:
     description: "YARA version to use"
-    default: "3.10.0"
     required: false
 runs:
   using: "docker"
