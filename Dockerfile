@@ -19,6 +19,7 @@ COPY hello.sh /tmp/hello.sh
 #     libssl-dev \
 #     libtool make
 # RUN chmod +x /tmp/install_yara.sh
+RUN chmod +x /tmp/hello.sh
 
 # ENTRYPOINT [ "/tmp/install_yara.sh" ]
 ENTRYPOINT [ "/tmp/hello.sh" ]
