@@ -24,7 +24,8 @@ function resolve_version {
         # let's loop through to get the most up-to-date matching version
         for i in "${ALL_VERSIONS[@]}"
         do
-            if [[ $i =~ "^${USER_INPUT}.*" ]]
+            pattern="^${USER_INPUT}.*"
+            if [[ $i =~ $pattern ]]
             then
                 YARA_VERSION=$i
                 break
