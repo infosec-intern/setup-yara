@@ -37,7 +37,7 @@ function resolve_version {
 }
 
 function install_yara {
-    echo "Installing YARA v$YARA_VERSION"
+    echo "Installing YARA v${YARA_VERSION}"
     git clone --recursive --branch v$YARA_VERSION https://github.com/VirusTotal/yara.git
     cd ./yara/
     ./bootstrap.sh
@@ -54,7 +54,7 @@ resolve_version
 if [[ ! -z ${YARA_VERSION} ]]
 then
     install_yara
-    echo "Successfully installed ${yara -v}"
+    echo "Successfully installed $(yara -v)"
     exit 0
 else
     echo "How did you get here? Exiting"
