@@ -20,4 +20,4 @@ jobs:
       with:
         yaraVersion: ${{ matrix.yaraVersion }}
     # finally, we should be able to access YARA
-    - run: yara -v
+    - run: /usr/local/bin/yara -v
