@@ -19,6 +19,6 @@ jobs:
     # use the local version of this action
     - uses: ./
       with:
-        yaraVersion: "3.10.0"
+        yaraVersion: ${{ matrix.yaraVersion }}
     # finally, we should be able to access YARA
     - run: yara -v
