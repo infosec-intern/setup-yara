@@ -3,22 +3,53 @@ name: setup-yara
 on: [push, pull_request]
 
 jobs:
-  install_yara:
-    strategy:
-      matrix:
-        # yaraVersion: [ "4", "3.10.0", "3.6", "2", "1.7.1" ]
-        yara-version: [ "3.10.0", "3.6", "2" ]
-    name: YARA v${{ matrix.yara-version }}
+  # install_yara:
+  #   strategy:
+  #     matrix:
+  #       yaraVersion: [ "4", "3.10.0", "3.6", "2", "1.7.1" ]
+  #   name: YARA v${{ matrix.yara-version }}
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #   # get a copy of the local repository
+  #   - uses: actions/checkout@v1
+  #     with:
+  #       fetch-depth: 1
+  #   # use the local version of this action
+  #   - uses: ./
+  #     with:
+  #       yara-version: ${{ matrix.yara-version }}
+  #   # finally, we should be able to access YARA
+  #   - run: yara -v
+  install_yara_3.10:
+    name: YARA v3.10.0
     runs-on: ubuntu-latest
     steps:
-    # get a copy of the local repository
     - uses: actions/checkout@v1
       with:
         fetch-depth: 1
-    # use the local version of this action
     - uses: ./
       with:
-        yara-version: ${{ matrix.yara-version }}
-    # finally, we should be able to access YARA
-    - run: echo "test"
+        yara-version: "3.10.0"
+    - run: yara -v
+  install_yara_3.6:
+    name: YARA v3.6
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+      with:
+        fetch-depth: 1
+    - uses: ./
+      with:
+        yara-version: "3.6"
+    - run: yara -v
+  install_yara_2:
+    name: YARA v2
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+      with:
+        fetch-depth: 1
+    - uses: ./
+      with:
+        yara-version: "2"
     - run: yara -v
