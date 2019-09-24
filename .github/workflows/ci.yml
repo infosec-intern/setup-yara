@@ -30,6 +30,7 @@ jobs:
     - uses: ./
       with:
         yara-version: "3.10.0"
+    - run: ls /github/workspace/yara
     - run: ls /usr/local/bin
     - run: echo $PATH
     - run: yara -v
@@ -43,6 +44,7 @@ jobs:
     - uses: ./
       with:
         yara-version: "3.6"
+    - run: ls /github/workspace/yara
     - run: ls /usr/local/bin
     - run: echo $PATH
     - run: yara -v
@@ -56,6 +58,7 @@ jobs:
     - uses: ./
       with:
         yara-version: "2"
+    - run: ls /github/workspace/yara
     - run: ls /usr/local/bin
     - run: echo $PATH
     - run: yara -v
