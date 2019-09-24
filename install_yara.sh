@@ -5,10 +5,12 @@ ALL_VERSIONS=( $(git ls-remote --tags https://github.com/VirusTotal/yara.git | g
 # latest version is used in case user does not provide input
 USR_INPUT=${ALL_VERSIONS[0]}
 
+echo "Args: $@"
+
 # if the user provided input, use that instead
-if [ ! -z ${INPUT_YARAVERSION} ]
+if [ ! -z ${1} ]
 then
-    USR_INPUT="${INPUT_YARAVERSION}"
+    USR_INPUT="${1}"
 fi
 
 function resolve_version {
