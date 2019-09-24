@@ -58,6 +58,6 @@ then
     echo "Successfully installed $(yara -v)"
     exit 0
 else
-    echo "How did you get here? Exiting"
+    echo "Some kind of bug occurred in resolve_version. Review logs for details. Exiting"
     exit 1
 fi
