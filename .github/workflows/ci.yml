@@ -15,7 +15,8 @@ jobs:
     - uses: actions/checkout@v1
       with:
         fetch-depth: 1
-    - run:
+    # create a dummy rulefile that does nothing but compile
+    - run: |
         echo 'rule dummy {condition: false}' > /tmp/rules/dummy.yara
     # use the local version of this action
     - uses: ./
