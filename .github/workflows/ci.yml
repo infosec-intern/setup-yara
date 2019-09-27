@@ -15,8 +15,10 @@ jobs:
     - uses: actions/checkout@v1
       with:
         fetch-depth: 1
+    - run:
+        echo 'rule dummy {condition: false}' > /tmp/rules/dummy.yara
     # use the local version of this action
     - uses: ./
       with:
         yara-version: ${{ matrix.yara-version }}
-        yara-rules: "rules/"
+        rules: "/tmp/rules/dummy.yara"

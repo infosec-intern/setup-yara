@@ -57,6 +57,7 @@ then
     install_yara && echo "Successfully installed $(yara -v)" || exit 1
     YARA_RULES="/tmp/rules/${INPUT_RULES}"
     YARA_FLAGS="${INPUT_FLAGS}"
+    echo "yarac ${YARA_FLAGS} ${YARA_RULES} /tmp/rules/yarac.out"
     OUTPUT=$(yarac ${YARA_FLAGS} ${YARA_RULES} "/tmp/rules/yarac.out")
     if [[ $OUTPUT =~ "error" ]]
     then
