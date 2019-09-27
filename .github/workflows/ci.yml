@@ -6,7 +6,8 @@ jobs:
   install_yara:
     strategy:
       matrix:
-        yara-version: [ "4", "3.10.0", "3.6", "2", "1.7.1" ]
+        # yara-version: [ "4", "3.10.0", "3.6", "2", "1.7.1" ]
+        yara-version: [ "3", "3.6", "2.0.0" ]
     name: YARA v${{ matrix.yara-version }}
     runs-on: ubuntu-latest
     steps:
