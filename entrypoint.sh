@@ -65,6 +65,7 @@ then
         LINENO=$(echo $OUTPUT | cut -d' ' -f 1 | cut -d'(' -f 2 | grep -Eio "[0-9]+?")
         ERRMSG=$(echo $OUTPUT | cut -d' ' -f 3-)
         echo ::error file="${FILENAME}",line="${LINENO}"::"${ERRMSG}"
+        exit 1
     elif [[ $OUTPUT =~ "warning" ]]
     then
         # /tmp/rules/rule.yara(3): warning: Using deprecated "entrypoint" keyword. Use the "entry_point" function from PE module instead.
@@ -72,9 +73,9 @@ then
         LINENO=$(echo $OUTPUT | cut -d' ' -f 1 | cut -d'(' -f 2 | grep -Eio "[0-9]+?")
         ERRMSG=$(echo $OUTPUT | cut -d' ' -f 3-)
         echo ::warning file="${FILENAME}",line="${LINENO}"::"${ERRMSG}"
-    else
-        exit 0
     fi
+    # if we get here, we either passed with no errors or only warnings - the run succeeded!
+    exit 0
 else
     echo "Some kind of bug occurred in resolve_version. Review logs for details. Exiting"
     exit 1
