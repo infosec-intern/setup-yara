@@ -61,14 +61,14 @@ then
     if [[ $OUTPUT =~ "error" ]]
     then
         # /tmp/rules/rule.yara(22): error: syntax error, unexpected '{', expecting identifier
-        FILENAME=$(echo $OUTPUT | cut -d' ' -f 1 | cut -d'(' -f 1))
+        FILENAME=$(echo $OUTPUT | cut -d' ' -f 1 | cut -d'(' -f 1)
         LINENO=$(echo $OUTPUT | cut -d' ' -f 1 | cut -d'(' -f 2 | grep -Eio "[0-9]+?")
         ERRMSG=$(echo $OUTPUT | cut -d' ' -f 3-)
         echo ::error file="${FILENAME}",line="${LINENO}"::"${ERRMSG}"
     elif [[ $OUTPUT =~ "warning" ]]
     then
         # /tmp/rules/rule.yara(3): warning: Using deprecated "entrypoint" keyword. Use the "entry_point" function from PE module instead.
-        FILENAME=$(echo $OUTPUT | cut -d' ' -f 1 | cut -d'(' -f 1))
+        FILENAME=$(echo $OUTPUT | cut -d' ' -f 1 | cut -d'(' -f 1)
         LINENO=$(echo $OUTPUT | cut -d' ' -f 1 | cut -d'(' -f 2 | grep -Eio "[0-9]+?")
         ERRMSG=$(echo $OUTPUT | cut -d' ' -f 3-)
         echo ::warning file="${FILENAME}",line="${LINENO}"::"${ERRMSG}"
