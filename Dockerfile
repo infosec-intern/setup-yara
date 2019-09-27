@@ -8,7 +8,7 @@ ARG INPUT_FLAGS
 WORKDIR /tmp
 COPY LICENSE README.md /
 COPY entrypoint.sh /tmp/entrypoint.sh
-COPY ${INPUT_RULES} /tmp/rules/${INPUT_RULES}
+COPY ${INPUT_RULES} /tmp/rules/
 
 RUN apt-get -qq update && apt-get install -qq -y \
     automake \
