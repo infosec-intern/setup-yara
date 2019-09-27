@@ -54,8 +54,10 @@ function install_yara {
 resolve_version
 if [[ ! -z ${YARA_VERSION} ]]
 then
-    install_yara
-    echo "Successfully installed $(yara -v)"
+    install_yara && echo "Successfully installed $(yara -v)" || exit 1
+    YARA_RULES="/tmp/rules/${INPUT_RULES}"
+    yarac -h
+    echo ${YARA_RULES}
 else
     echo "Some kind of bug occurred in resolve_version. Review logs for details. Exiting"
     exit 1
