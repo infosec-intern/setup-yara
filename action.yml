@@ -5,6 +5,10 @@ inputs:
   rules:
     description: "Directory of YARA rules to attempt to compile. Single filenames also accepted"
     required: true
+  flags:
+    description: "Flags to pass to the YARA compiler. No flags are set by default"
+    required: false
+    default: ""
   yara-version:
     description: "YARA version to use"
     required: false

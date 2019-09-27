@@ -4,6 +4,7 @@ FROM ubuntu:latest
 LABEL maintainer="thomas@infosec-intern.com"
 
 ARG INPUT_RULES
+ARG INPUT_FLAGS
 WORKDIR /tmp
 COPY LICENSE README.md /
 COPY entrypoint.sh /tmp/entrypoint.sh

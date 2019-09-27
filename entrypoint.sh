@@ -56,8 +56,25 @@ if [[ ! -z ${YARA_VERSION} ]]
 then
     install_yara && echo "Successfully installed $(yara -v)" || exit 1
     YARA_RULES="/tmp/rules/${INPUT_RULES}"
-    yarac -h
-    echo ${YARA_RULES}
+    YARA_FLAGS="${INPUT_FLAGS}"
+    OUTPUT=$(yarac ${YARA_FLAGS} ${YARA_RULES} "/tmp/rules/yarac.out")
+    if [[ $OUTPUT =~ "error" ]]
+    then
+        # /tmp/rules/rule.yara(22): error: syntax error, unexpected '{', expecting identifier
+        FILENAME=$(echo $OUTPUT | cut -d' ' -f 1 | cut -d'(' -f 1))
+        LINENO=$(echo $OUTPUT | cut -d' ' -f 1 | cut -d'(' -f 2 | grep -Eio "[0-9]+?")
+        ERRMSG=$(echo $OUTPUT | cut -d' ' -f 3-)
+        echo ::error file="${FILENAME}",line="${LINENO}"::"${ERRMSG}"
+    elif [[ $OUTPUT =~ "warning" ]]
+    then
+        # /tmp/rules/rule.yara(3): warning: Using deprecated "entrypoint" keyword. Use the "entry_point" function from PE module instead.
+        FILENAME=$(echo $OUTPUT | cut -d' ' -f 1 | cut -d'(' -f 1))
+        LINENO=$(echo $OUTPUT | cut -d' ' -f 1 | cut -d'(' -f 2 | grep -Eio "[0-9]+?")
+        ERRMSG=$(echo $OUTPUT | cut -d' ' -f 3-)
+        echo ::warning file="${FILENAME}",line="${LINENO}"::"${ERRMSG}"
+    else
+        exit 0
+    fi
 else
     echo "Some kind of bug occurred in resolve_version. Review logs for details. Exiting"
     exit 1
