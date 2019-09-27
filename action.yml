@@ -2,6 +2,9 @@ name: "Setup YARA environment"
 description: "Setup a user-defined YARA version. Executable and compiler only; no yara-python."
 author: "ch0mler"
 inputs:
+  rules:
+    description: "Directory of YARA rules to attempt to compile. Single filenames also accepted"
+    required: true
   yara-version:
     description: "YARA version to use"
     required: false

@@ -18,5 +18,4 @@ jobs:
     - uses: ./
       with:
         yara-version: ${{ matrix.yara-version }}
-    # finally, we should be able to access YARA
-    - run: yara -v
+        yara-rules: "rules/"
