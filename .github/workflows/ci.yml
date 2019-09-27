@@ -17,9 +17,9 @@ jobs:
         fetch-depth: 1
     # create a dummy rulefile that does nothing but compile
     - run: |
-        echo 'rule dummy {condition: false}' > /tmp/rules/dummy.yara
+        echo 'rule dummy {condition: false}' > /tmp/dummy.yara
     # use the local version of this action
     - uses: ./
       with:
         yara-version: ${{ matrix.yara-version }}
-        rules: "/tmp/rules/dummy.yara"
+        rules: "/tmp/dummy.yara"
