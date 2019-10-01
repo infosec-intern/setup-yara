@@ -5,7 +5,7 @@ inputs:
   rules:
     description: "Directory of YARA rules to attempt to compile. Single filenames also accepted, Defaults to the current directory"
     required: false
-    default: "."
+    default: "./"
   flags:
     description: "Flags to pass to the YARA compiler. Defaults to just the '--recursive' flag"
     required: false
