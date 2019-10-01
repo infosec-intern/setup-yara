@@ -8,7 +8,7 @@ ARG INPUT_FLAGS
 ARG GITHUB_WORKSPACE
 WORKDIR /tmp
 COPY LICENSE README.md /
-COPY entrypoint.sh entrypoint.sh
+COPY entrypoint.sh /tmp/entrypoint.sh
 COPY ${INPUT_RULES} ${GITHUB_WORKSPACE}/rules/
 
 RUN apt-get -qq update && apt-get install -qq -y \
@@ -22,6 +22,6 @@ RUN apt-get -qq update && apt-get install -qq -y \
     libssl-dev \
     libtool \
     make
-RUN chmod +x entrypoint.sh
+RUN chmod +x /tmp/entrypoint.sh
 
-ENTRYPOINT [ "entrypoint.sh" ]
+ENTRYPOINT [ "/tmp/entrypoint.sh" ]
