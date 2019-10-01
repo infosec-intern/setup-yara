@@ -70,6 +70,10 @@ then
         ERRMSG=$(echo $OUTPUT | cut -d' ' -f 3-)
         echo ::error file="${FILENAME}",line="${LINENO}"::"${ERRMSG}"
         exit 1
+    elif [[ $OUTPUT =~ "unknown option" ]]
+    then
+        echo ::error "${OUTPUT}"
+        exit 1
     elif [[ $OUTPUT =~ "warning" ]]
     then
         # /tmp/rules/rule.yara(3): warning: Using deprecated "entrypoint" keyword. Use the "entry_point" function from PE module instead.
