@@ -55,10 +55,13 @@ resolve_version
 if [[ ! -z ${YARA_VERSION} ]]
 then
     install_yara && echo "Successfully installed $(yara -v)" || exit 1
-    YARA_RULES="/tmp/rules/${INPUT_RULES}"
+    RULES_DIR="${GITHUB_WORKSPACE}/rules"
+    mkdir -p ${RULES_DIR}
+    echo "" > ${RULES_DIR}/empty
+    YARA_RULES="${RULES_DIR}/${INPUT_RULES}"
     YARA_FLAGS="${INPUT_FLAGS}"
-    echo "yarac ${YARA_FLAGS} ${YARA_RULES} /tmp/rules/yarac.out"
-    OUTPUT=$(yarac ${YARA_FLAGS} ${YARA_RULES} "/tmp/rules/yarac.out")
+    echo "yara ${YARA_FLAGS} ${YARA_RULES} ${RULES_DIR}/empty"
+    OUTPUT=$(yara ${YARA_FLAGS} ${YARA_RULES} "${RULES_DIR}/empty")
     if [[ $OUTPUT =~ "error" ]]
     then
         # /tmp/rules/rule.yara(22): error: syntax error, unexpected '{', expecting identifier
