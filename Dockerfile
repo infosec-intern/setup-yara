@@ -5,10 +5,11 @@ LABEL maintainer="thomas@infosec-intern.com"
 
 ARG INPUT_RULES
 ARG INPUT_FLAGS
+ARG GITHUB_WORKSPACE
 WORKDIR /tmp
 COPY LICENSE README.md /
-COPY entrypoint.sh /tmp/entrypoint.sh
-COPY ${INPUT_RULES} /tmp/rules/
+COPY entrypoint.sh entrypoint.sh
+COPY ${INPUT_RULES} ${GITHUB_WORKSPACE}/rules/
 
 RUN apt-get -qq update && apt-get install -qq -y \
     automake \
@@ -21,6 +22,6 @@ RUN apt-get -qq update && apt-get install -qq -y \
     libssl-dev \
     libtool \
     make
-RUN chmod +x /tmp/entrypoint.sh
+RUN chmod +x entrypoint.sh
 
-ENTRYPOINT [ "/tmp/entrypoint.sh" ]
+ENTRYPOINT [ "entrypoint.sh" ]

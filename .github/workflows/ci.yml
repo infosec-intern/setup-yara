@@ -3,23 +3,39 @@ name: setup-yara
 on: [push, pull_request]
 
 jobs:
-  install_yara:
-    strategy:
-      matrix:
-        # yara-version: [ "4", "3.10.0", "3.6", "2", "1.7.1" ]
-        yara-version: [ "3", "3.6", "2.0.0" ]
-    name: YARA v${{ matrix.yara-version }}
+  major_test:
     runs-on: ubuntu-latest
     steps:
-    # get a copy of the local repository
     - uses: actions/checkout@v1
       with:
         fetch-depth: 1
-    # create a dummy rulefile that does nothing but compile
     - run: |
-        echo 'rule dummy {condition: false}' > /tmp/dummy.yara
-    # use the local version of this action
+        echo 'rule dummy {condition: false}' > ${GITHUB_WORKSPACE}/dummy.yara
     - uses: ./
       with:
-        yara-version: ${{ matrix.yara-version }}
+        yara-version: "3"
+        rules: "dummy.yar"
+  minor_test:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+      with:
+        fetch-depth: 1
+    - run: |
+        echo 'rule dummy {condition: false}' > ${GITHUB_WORKSPACE}/dummy.yara
+    - uses: ./
+      with:
+        yara-version: "3.6"
+        rules: "dummy.yar"
+  patch_test:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+      with:
+        fetch-depth: 1
+    - run: |
+        echo 'rule dummy {condition: false}' > ${GITHUB_WORKSPACE}/dummy.yara
+    - uses: ./
+      with:
+        yara-version: "2.0.0"
         rules: "dummy.yar"
